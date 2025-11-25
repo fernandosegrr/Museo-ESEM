@@ -146,7 +146,6 @@
             font-size: 0.8rem;
             position: relative;
             overflow: hidden;
-            white-space: nowrap;
         }
 
         .btn-guia::before {
@@ -591,6 +590,7 @@
             max-height: 90vh;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(212, 175, 55, 0.2);
             position: relative;
+            /* Se asegura que el contenido no desborde */
         }
 
         .ficha-header {
@@ -642,29 +642,32 @@
         .impact-box {
             background: rgba(212, 175, 55, 0.08);
             padding: 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 5px solid var(--gold);
         }
 
-        /* FIX: RESPONSIVIDAD DEL HEADER Y BOTON */
         @media (max-width: 768px) {
-            header {
-                height: auto;
-                flex-direction: column;
-                padding: 15px;
-                gap: 15px;
-            }
-
             header h1 {
-                font-size: 1.2rem;
-            }
-
-            .btn-guia {
-                width: 100%;
-                text-align: center;
-                font-size: 0.9rem;
+                font-size: 2.5rem;
+                letter-spacing: 6px;
             }
 
             .grid-salas {
                 grid-template-columns: 1fr;
+            }
+
+            .modal-content,
+            .ficha-modal {
+                padding: 30px;
+            }
+
+            .intro-museo {
+                padding: 25px;
+            }
+
+            .container {
+                padding: 120px 20px 60px;
             }
         }
     </style>
@@ -685,11 +688,10 @@
         <div class="intro-museo" id="main-intro">
             <h2>Bienvenido al Museo</h2>
             <p>Explora seis salas temáticas que revelan cómo los modelos económicos han moldeado la vida cotidiana, el
-                trabajo, la cultura y el bienestar de los mexicanos.</p>
+                trabajo, la cultura y el bienestar de los mexicanos desde el Porfiriato hasta nuestros días.</p>
         </div>
 
-        <div id="lobby" class="grid-salas">
-        </div>
+        <div id="lobby" class="grid-salas"></div>
 
         <div id="view-room">
             <div class="room-header">
@@ -704,39 +706,82 @@
         </div>
     </div>
 
+    <!-- MODAL GUÍA -->
     <div id="modal-guide" class="modal-overlay">
         <div class="modal-content">
             <span class="close-btn" onclick="toggleGuide()">&times;</span>
             <div class="guide-section">
                 <h2 class="guide-title">🏛️ Bienvenido a Nexos</h2>
                 <p style="line-height: 1.9; font-size: 1.2rem;"><strong>Nexos: Museo de la Transformación
-                        Mexicana</strong> es un espacio virtual para comprender nuestra historia económica.</p>
+                        Mexicana</strong> es un espacio virtual diseñado para comprender que la economía no son solo
+                    números abstractos, sino la historia viva de nuestra sociedad. <br><br>Aquí exploraremos cómo los
+                    distintos <strong>modelos económicos</strong> (desde el Porfiriato hasta la actualidad) han moldeado
+                    nuestra vida diaria.</p>
             </div>
-
             <div class="guide-section">
                 <h2 class="guide-title">⏳ Línea del Tiempo Económica</h2>
                 <div class="timeline">
                     <div class="tl-item">
                         <div class="tl-date">1876 - 1910</div>
-                        <div><strong>Modelo Primario Exportador</strong><br>Porfiriato.</div>
+                        <div><strong>Modelo Primario Exportador (Porfiriato)</strong><br>Crecimiento basado en
+                            exportación de materias primas e inversión extranjera.</div>
                     </div>
                     <div class="tl-item">
                         <div class="tl-date">1940 - 1954</div>
-                        <div><strong>Sustitución de Importaciones</strong><br>Industrialización nacional.</div>
+                        <div><strong>Modelo de Sustitución de Importaciones (ISI)</strong><br>Industrialización nacional
+                            para producir lo que antes se compraba fuera.</div>
                     </div>
                     <div class="tl-item">
                         <div class="tl-date">1954 - 1970</div>
-                        <div><strong>Desarrollo Estabilizador</strong><br>El Milagro Mexicano.</div>
+                        <div><strong>Desarrollo Estabilizador ("El Milagro Mexicano")</strong><br>Alto crecimiento, baja
+                            inflación y estabilidad cambiaria.</div>
+                    </div>
+                    <div class="tl-item">
+                        <div class="tl-date">1970 - 1982</div>
+                        <div><strong>Desarrollo Compartido y Alianza</strong><br>Expansión del gasto público que terminó
+                            en crisis de deuda e inflación.</div>
                     </div>
                     <div class="tl-item">
                         <div class="tl-date">1982 - 2018</div>
-                        <div><strong>Neoliberalismo</strong><br>Apertura y TLCAN.</div>
+                        <div><strong>Modelo Neoliberal</strong><br>Apertura comercial (TLCAN), privatizaciones y
+                            reducción del Estado.</div>
+                    </div>
+                    <div class="tl-item">
+                        <div class="tl-date">2018 - Presente</div>
+                        <div><strong>Post-Neoliberalismo / Economía Moral</strong><br>Enfoque en redistribución social y
+                            fortalecimiento de la soberanía energética.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="guide-section">
+                <h2 class="guide-title">❓ Preguntas para Reflexionar</h2>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <span class="faq-room">Monedas y Billetes</span>
+                        <div class="faq-q">¿Por qué un billete de 10,000 pesos de antes vale menos que una moneda de 10
+                            pesos de hoy?</div>
+                    </div>
+                    <div class="faq-item">
+                        <span class="faq-room">Tecnología y Trabajo</span>
+                        <div class="faq-q">¿Cómo cambió la vida de un obrero con la llegada de la automatización y las
+                            computadoras?</div>
+                    </div>
+                    <div class="faq-item">
+                        <span class="faq-room">Entretenimiento y Cultura</span>
+                        <div class="faq-q">¿El cine y la música que consumimos son reflejo de nuestra riqueza o de
+                            nuestras crisis?</div>
+                    </div>
+                    <div class="faq-item">
+                        <span class="faq-room">Salud y Educación</span>
+                        <div class="faq-q">¿Ha logrado México garantizar salud y educación igualitaria en todos sus
+                            modelos económicos?</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- MODAL FICHA TÉCNICA -->
     <div id="modal-ficha" class="modal-overlay" onclick="closeFichaOutside(event)">
         <div class="ficha-modal">
             <span class="close-btn" onclick="toggleFicha()">&times;</span>
@@ -747,18 +792,24 @@
             </div>
             <div class="ficha-body">
                 <center><span id="f-concept" class="concept-tag"></span></center>
+
                 <div class="data-row">
-                    <span class="data-label">Periodo: </span> <span id="f-period" class="data-value"></span>
+                    <span class="data-label">Periodo:</span>
+                    <span id="f-period" class="data-value"></span>
                 </div>
                 <div class="data-row">
-                    <span class="data-label">Presidente:</span> <span id="f-president" class="data-value"></span>
+                    <span class="data-label">Presidente:</span>
+                    <span id="f-president" class="data-value"></span>
                 </div>
                 <div class="data-row">
-                    <span class="data-label">Modelo:</span> <span id="f-model" class="data-value"></span>
+                    <span class="data-label">Modelo:</span>
+                    <span id="f-model" class="data-value"></span>
                 </div>
                 <div class="data-row">
-                    <span class="data-label">Factor Económico:</span> <span id="f-growth" class="data-value"></span>
+                    <span class="data-label">Factor Económico:</span>
+                    <span id="f-growth" class="data-value"></span>
                 </div>
+
                 <div class="impact-box">
                     <p id="f-desc" style="line-height:1.6; color: var(--text-muted);"></p>
                 </div>
@@ -767,94 +818,317 @@
     </div>
 
     <script>
-        // DATOS
+        // DATOS CON IMÁGENES ASIGNADAS
         const salasInfo = {
-            monedas: { title: "Valor y Moneda", desc: "La historia de la inflación.", icon: "💰", img: "images/sala_monedas.png", intro: "Observa cómo el valor del peso ha fluctuado.", pregunta: "¿Qué nos dice el dinero sobre la estabilidad?" },
-            tecnologia: { title: "Tecnología y Trabajo", desc: "Herramientas que transformaron la producción.", icon: "⚙️", img: "images/sala_tecnologia.png", intro: "Desde los telares hasta las computadoras.", pregunta: "¿La tecnología liberó al trabajador?" },
-            entretenimiento: { title: "Cultura y Ocio", desc: "El cine y juguetes como espejo.", icon: "🎭", img: "images/sala_entretenimiento.png", intro: "El entretenimiento no es ajeno a la economía.", pregunta: "¿Cómo nos divertimos en crisis?" },
-            salud: { title: "Bienestar Social", desc: "Salud y educación.", icon: "🏥", img: "images/sala_salud.png", intro: "El intento del Estado por dar bienestar.", pregunta: "¿Es el bienestar un derecho?" },
-            gobierno: { title: "Poder y Política", desc: "Símbolos del presidencialismo.", icon: "🏛️", img: "images/sala_gobierno.png", intro: "La evolución de la propaganda.", pregunta: "¿Cómo legitima el Estado sus decisiones?" },
-            vida: { title: "Vida Cotidiana", desc: "Objetos del hogar.", icon: "🏠", img: "images/sala_vida.png", intro: "Los objetos cotidianos narran el cambio.", pregunta: "¿Cómo cambia nuestro hogar?" }
+            monedas: {
+                title: "Valor y Moneda",
+                desc: "La historia de la inflación a través del dinero.",
+                icon: "💰",
+                img: "images/sala_monedas.png",
+                intro: "Observa cómo el valor del peso ha fluctuado drásticamente, reflejando crisis de deuda, bonanzas petroleras y reordenamientos monetarios.",
+                pregunta: "¿Qué nos dice el dinero sobre la estabilidad de un país?"
+            },
+            tecnologia: {
+                title: "Tecnología y Trabajo",
+                desc: "Herramientas que transformaron la producción.",
+                icon: "⚙️",
+                img: "images/sala_tecnologia.png",
+                intro: "Desde los telares del Porfiriato hasta las primeras computadoras gubernamentales, la tecnología ha redefinido quién trabaja y cómo.",
+                pregunta: "¿La tecnología liberó al trabajador o lo reemplazó?"
+            },
+            entretenimiento: {
+                title: "Cultura y Ocio",
+                desc: "El cine, juguetes y música como espejo social.",
+                icon: "🎭",
+                img: "images/sala_entretenimiento.png",
+                intro: "El entretenimiento no es ajeno a la economía: el Cine de Oro fue una industria de exportación, mientras que la crisis de los 80 gestó el rock nacional.",
+                pregunta: "¿Cómo nos divertimos en tiempos de crisis?"
+            },
+            salud: {
+                title: "Bienestar Social",
+                desc: "Salud y educación como pilares del desarrollo.",
+                icon: "🏥",
+                img: "images/sala_salud.png",
+                intro: "La creación del IMSS y los Libros de Texto Gratuitos marcaron el intento del Estado por garantizar un piso mínimo de bienestar.",
+                pregunta: "¿Es el bienestar un derecho o un servicio?"
+            },
+            gobierno: {
+                title: "Poder y Política",
+                desc: "Símbolos del presidencialismo y la democracia.",
+                icon: "🏛️",
+                img: "images/sala_gobierno.png",
+                intro: "La evolución de la propaganda y los procesos electorales muestra el tránsito del partido hegemónico a la pluralidad política.",
+                pregunta: "¿Cómo legitima el Estado sus decisiones económicas?"
+            },
+            vida: {
+                title: "Vida Cotidiana",
+                desc: "Objetos del hogar y consumo diario.",
+                icon: "🏠",
+                img: "images/sala_vida.png",
+                intro: "Desde el peltre en la cocina hasta el boleto del Metro, los objetos cotidianos narran la urbanización y el cambio en el poder adquisitivo.",
+                pregunta: "¿Cómo cambia nuestro hogar con la economía?"
+            }
         };
 
         const objetos = [
-            { sala: 'monedas', nombre: "Billete de 10,000 Pesos", icon: "💵", img: "images/monedas_billete_10000.png", periodo: "1980s", pres: "López Portillo", mod: "Crisis de Deuda", growth: "Hiperinflación", con: "Pérdida de Poder", desc: "Testigo de la inflación de los 80s." },
-            { sala: 'monedas', nombre: "Petrobonos", icon: "🛢️", img: "images/monedas_petrobonos.png", periodo: "1977-1980", pres: "López Portillo", mod: "Auge Petrolero", growth: "Deuda Pública", con: "Abundancia", desc: "Instrumentos respaldados por petróleo." },
-            { sala: 'tecnologia', nombre: "Máquina Olivetti", icon: "⌨️", img: "images/tecnologia_maquina_olivetti.png", periodo: "1960-1980", pres: "Díaz Ordaz", mod: "Desarrollo Estabilizador", growth: "Burocracia", con: "Clase Media", desc: "Símbolo del trabajo de oficina." },
-            { sala: 'tecnologia', nombre: "Telar Mecánico", icon: "🧵", img: "images/tecnologia_telar.png", periodo: "Porfiriato", pres: "Porfirio Díaz", mod: "Industrialización", growth: "Manufactura", con: "Huelgas", desc: "Maquinaria extranjera en México." },
-            { sala: 'entretenimiento', nombre: "Cartel Cine de Oro", icon: "🎥", img: "images/entretenimiento_cartel_cine.png", periodo: "1940-1950", pres: "Ávila Camacho", mod: "ISI", growth: "Identidad", con: "Exportación", desc: "El cine dominando el mercado hispano." },
-            { sala: 'salud', nombre: "Libro de Texto", icon: "📖", img: "images/salud_libro_texto.png", periodo: "1960", pres: "López Mateos", mod: "Desarrollo Estabilizador", growth: "Inversión Social", con: "Educación", desc: "Conocimiento básico garantizado." }
+            {
+                sala: 'monedas',
+                nombre: "Billete de 10,000 Pesos",
+                icon: "💵",
+                img: "images/monedas_billete_10000.png",
+                periodo: "1980s",
+                pres: "José López Portillo / De la Madrid",
+                mod: "Crisis de Deuda",
+                growth: "Hiperinflación",
+                con: "Pérdida de Poder Adquisitivo",
+                desc: "Este billete, que hoy equivaldría a 10 nuevos pesos, es testigo de la terrible inflación de los 80s, donde los precios cambiaban día a día."
+            },
+            {
+                sala: 'monedas',
+                nombre: "Petrobonos",
+                icon: "🛢️",
+                img: "images/monedas_petrobonos.png",
+                periodo: "1977-1980",
+                pres: "José López Portillo",
+                mod: "Alianza para la Producción",
+                growth: "Auge Petrolero",
+                con: "Deuda Pública",
+                desc: "Instrumentos financieros respaldados por petróleo, creados bajo la premisa de que 'debíamos administrar la abundancia'."
+            },
+            {
+                sala: 'tecnologia',
+                nombre: "Máquina de Escribir Olivetti",
+                icon: "⌨️",
+                img: "images/tecnologia_maquina_olivetti.png",
+                periodo: "1960-1980",
+                pres: "Díaz Ordaz / Echeverría",
+                mod: "Desarrollo Estabilizador",
+                growth: "Crecimiento sostenido",
+                con: "Burocracia",
+                desc: "Símbolo del trabajo de oficina en la expansión de la clase media y la administración pública."
+            },
+            {
+                sala: 'tecnologia',
+                nombre: "Telar Mecánico",
+                icon: "🧵",
+                img: "images/tecnologia_telar.png",
+                periodo: "Porfiriato",
+                pres: "Porfirio Díaz",
+                mod: "Primario Exportador",
+                growth: "Industrialización incipiente",
+                con: "Manufactura",
+                desc: "La entrada de maquinaria extranjera modernizó la producción textil pero generó tensiones laborales (Huelga de Río Blanco)."
+            },
+            {
+                sala: 'tecnologia',
+                nombre: "Primera Computadora de Gobierno",
+                icon: "🖥️",
+                img: "images/tecnologia_computadora.png",
+                periodo: "1970s",
+                pres: "Luis Echeverría",
+                mod: "Desarrollo Compartido",
+                growth: "Gasto Público",
+                con: "Modernización",
+                desc: "El inicio de la digitalización administrativa, aunque reservada para élites técnicas y gubernamentales."
+            },
+            {
+                sala: 'entretenimiento',
+                nombre: "Cartel Cine de Oro",
+                icon: "🎥",
+                img: "images/entretenimiento_cartel_cine.png",
+                periodo: "1940-1950",
+                pres: "Manuel Ávila Camacho",
+                mod: "Sustitución de Importaciones",
+                growth: "Alto Crecimiento",
+                con: "Identidad Nacional",
+                desc: "El cine mexicano dominó el mercado hispano, exportando cultura y generando divisas durante la guerra mundial."
+            },
+            {
+                sala: 'entretenimiento',
+                nombre: "Juguete de Madera (Balero)",
+                icon: "🪀",
+                img: "images/entretenimiento_balero.png",
+                periodo: "Siglo XX",
+                pres: "Varios",
+                mod: "Economía Tradicional",
+                growth: "Mercado Interno",
+                con: "Artesanía",
+                desc: "Resistencia de la cultura popular y la manufactura artesanal frente a la entrada de juguetes de plástico importados."
+            },
+            {
+                sala: 'entretenimiento',
+                nombre: "Disco de Rock en Español",
+                icon: "🎸",
+                img: "images/entretenimiento_disco_rock.png",
+                periodo: "1980s",
+                pres: "Miguel de la Madrid",
+                mod: "Crisis / Apertura",
+                growth: "Contracción",
+                con: "Globalización Cultural",
+                desc: "Surgimiento de una voz juvenil crítica en medio de la crisis económica y social."
+            },
+            {
+                sala: 'salud',
+                nombre: "Libro de Texto Gratuito",
+                icon: "📖",
+                img: "images/salud_libro_texto.png",
+                periodo: "1960 (Creación)",
+                pres: "Adolfo López Mateos",
+                mod: "Desarrollo Estabilizador",
+                growth: "Inversión Social",
+                con: "Educación Universal",
+                desc: "Estandarización de la enseñanza primaria, garantizando acceso al conocimiento básico para todos los niños mexicanos."
+            },
+            {
+                sala: 'salud',
+                nombre: "Cartilla de Vacunación",
+                icon: "💉",
+                img: "images/salud_cartilla_vacunacion.png",
+                periodo: "1943 (IMSS)",
+                pres: "Manuel Ávila Camacho",
+                mod: "Sustitución de Importaciones",
+                growth: "Seguridad Social",
+                con: "Salud Pública",
+                desc: "Creación de instituciones (IMSS) para asegurar una fuerza laboral sana para la naciente industria."
+            },
+            {
+                sala: 'salud',
+                nombre: "Desayuno Escolar (DIF)",
+                icon: "🥛",
+                img: "images/salud_desayuno_escolar.png",
+                periodo: "1970s",
+                pres: "Luis Echeverría",
+                mod: "Desarrollo Compartido",
+                growth: "Gasto Social",
+                con: "Asistencia",
+                desc: "Programas para combatir la desnutrición infantil y mejorar el rendimiento escolar en zonas marginadas."
+            },
+            {
+                sala: 'gobierno',
+                nombre: "Boleta Electoral 1988",
+                icon: "🗳️",
+                img: "images/gobierno_boleta_1988.png",
+                periodo: "1988",
+                pres: "Miguel de la Madrid (Salida)",
+                mod: "Fin del Nacionalismo",
+                growth: "Inestabilidad",
+                con: "Democracia",
+                desc: "La controvertida 'caída del sistema' que marcó el inicio de una fuerte presión por la democratización política."
+            },
+            {
+                sala: 'gobierno',
+                nombre: "Propaganda 'La Solución Somos Todos'",
+                icon: "📢",
+                img: "images/gobierno_propaganda_solucion.png",
+                periodo: "1976-1982",
+                pres: "José López Portillo",
+                mod: "Alianza para la Producción",
+                growth: "Crisis Final",
+                con: "Legitimidad",
+                desc: "Intentos del gobierno por mantener la unidad nacional ante las inminentes crisis económicas."
+            },
+            {
+                sala: 'gobierno',
+                nombre: "Banda Presidencial",
+                icon: "🇲🇽",
+                img: "images/gobierno_banda_presidencial.png",
+                periodo: "Todo el siglo",
+                pres: "Todos",
+                mod: "Presidencialismo",
+                growth: "Centralismo",
+                con: "Poder Ejecutivo",
+                desc: "Símbolo máximo del poder político en México, históricamente centralizado en la figura del Presidente."
+            },
+            {
+                sala: 'vida',
+                nombre: "Boleto del Metro (1a Edición)",
+                icon: "🚇",
+                img: "images/vida_boleto_metro.png",
+                periodo: "1969",
+                pres: "Gustavo Díaz Ordaz",
+                mod: "Desarrollo Estabilizador",
+                growth: "Urbanización",
+                con: "Movilidad",
+                desc: "Símbolo de la modernización del Distrito Federal y la masificación del transporte público."
+            },
+            {
+                sala: 'vida',
+                nombre: "Utensilios de Peltre",
+                icon: "🥣",
+                img: "images/vida_utensilios_peltre.png",
+                periodo: "1950s",
+                pres: "Ruiz Cortines",
+                mod: "Desarrollo Estabilizador",
+                growth: "Consumo",
+                con: "Vida Doméstica",
+                desc: "El paso del barro al peltre y luego al aluminio refleja la industrialización del hogar mexicano."
+            },
+            {
+                sala: 'vida',
+                nombre: "Arado vs Tractor",
+                icon: "🚜",
+                img: "images/vida_arado_tractor.png",
+                periodo: "1940-1970",
+                pres: "Varios",
+                mod: "Reforma Agraria / Revolución Verde",
+                growth: "Desigualdad",
+                con: "Campo Mexicano",
+                desc: "La brecha tecnológica entre el norte agroindustrial y el sur campesino de subsistencia."
+            }
         ];
 
-        // ELEMENTOS DOM
         const lobby = document.getElementById('lobby');
         const mainIntro = document.getElementById('main-intro');
         const viewRoom = document.getElementById('view-room');
         const modalGuide = document.getElementById('modal-guide');
         const modalFicha = document.getElementById('modal-ficha');
-        const header = document.querySelector('header');
 
-        // INICIALIZACIÓN
         function init() {
-            renderLobby();
-        }
-
-        // RENDERIZAR LOBBY (GENERACIÓN DE HTML)
-        function renderLobby() {
-            lobby.innerHTML = '';
             Object.keys(salasInfo).forEach(key => {
-                const sala = salasInfo[key];
-                // OPTIMIZACION: loading="lazy" en imágenes
-                // Se usa onerror para mostrar el icono si la imagen falla
-                const card = document.createElement('div');
-                card.className = 'card-sala';
-                card.onclick = () => openRoom(key);
-                card.innerHTML = `
-                    <img src="${sala.img}" class="sala-img" alt="${sala.title}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                    <div class="icon-sala" style="display:none">${sala.icon}</div>
-                    <div class="title-sala">${sala.title}</div>
-                    <div class="desc-sala">${sala.desc}</div>
-                `;
-                lobby.appendChild(card);
+                const data = salasInfo[key];
+                const div = document.createElement('div');
+                div.className = 'card-sala';
+
+                // Si existe img, se usa; si no, se usa el icono
+                let content = data.img ?
+                    `<img src="${data.img}" class="sala-img" alt="${data.title}">` :
+                    `<span class="icon-sala">${data.icon}</span>`;
+
+                div.innerHTML = content +
+                    `<div class="title-sala">${data.title}</div>
+                     <div class="desc-sala">${data.desc}</div>`;
+                div.onclick = () => openRoom(key);
+                lobby.appendChild(div);
             });
         }
 
-        // NAVEGACIÓN
-        function openRoom(salaKey) {
-            const sala = salasInfo[salaKey];
-            const objsSala = objetos.filter(o => o.sala === salaKey);
-
-            // Ocultar lobby
+        function openRoom(key) {
             lobby.style.display = 'none';
             mainIntro.style.display = 'none';
+            viewRoom.style.display = 'block';
 
-            // Llenar datos de sala
-            document.getElementById('room-title').innerText = sala.title;
-            document.getElementById('room-intro').innerText = sala.intro;
-            document.getElementById('room-question').innerText = sala.pregunta;
+            const info = salasInfo[key];
+            document.getElementById('room-title').innerText = info.title;
+            document.getElementById('room-intro').innerText = info.intro;
+            document.getElementById('room-question').innerText = info.pregunta;
 
-            // Renderizar objetos
-            const gridObj = document.getElementById('room-objects');
-            gridObj.innerHTML = '';
+            const container = document.getElementById('room-objects');
+            container.innerHTML = '';
 
-            objsSala.forEach(obj => {
+            objetos.filter(o => o.sala === key).forEach(obj => {
                 const card = document.createElement('div');
                 card.className = 'card-object';
-                // Pasar el objeto entero a la función showFicha
-                card.onclick = function () { showFicha(obj); };
 
-                // OPTIMIZACION: loading="lazy"
-                card.innerHTML = `
-                    <img src="${obj.img}" class="obj-img" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                    <div class="obj-icon" style="display:none">${obj.icon}</div>
-                    <div class="obj-title">${obj.nombre}</div>
-                    <div class="obj-meta">${obj.periodo}</div>
-                `;
-                gridObj.appendChild(card);
+                let objContent = obj.img ?
+                    `<img src="${obj.img}" class="obj-img" alt="${obj.nombre}">` :
+                    `<span class="obj-icon">${obj.icon}</span>`;
+
+                card.innerHTML = objContent +
+                    `<div class="obj-title">${obj.nombre}</div>
+                     <div class="obj-meta">${obj.periodo}</div>`;
+                card.onclick = () => openFicha(obj);
+                container.appendChild(card);
             });
-
-            // Mostrar sala
-            viewRoom.style.display = 'block';
             window.scrollTo(0, 0);
         }
 
@@ -862,10 +1136,8 @@
             viewRoom.style.display = 'none';
             lobby.style.display = 'grid';
             mainIntro.style.display = 'block';
-            window.scrollTo(0, 0);
         }
 
-        // MODALES
         function toggleGuide() {
             const isActive = modalGuide.classList.contains('active');
             if (isActive) {
@@ -877,25 +1149,28 @@
             }
         }
 
-        function showFicha(obj) {
-            // Llenar datos del modal
+        function openFicha(obj) {
             document.getElementById('f-title').innerText = obj.nombre;
+            const imgContainer = document.getElementById('f-img-container');
+            const iconDiv = document.getElementById('f-icon');
+
+            if (obj.img) {
+                imgContainer.innerHTML = `<img src="${obj.img}" style="width:100%; max-width:400px; border-radius:15px; border:3px solid var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">`;
+                imgContainer.style.display = 'block';
+                iconDiv.style.display = 'none';
+            } else {
+                imgContainer.innerHTML = '';
+                imgContainer.style.display = 'none';
+                iconDiv.innerText = obj.icon;
+                iconDiv.style.display = 'block';
+            }
+
             document.getElementById('f-concept').innerText = obj.con;
             document.getElementById('f-period').innerText = obj.periodo;
             document.getElementById('f-president').innerText = obj.pres;
             document.getElementById('f-model').innerText = obj.mod;
             document.getElementById('f-growth').innerText = obj.growth;
             document.getElementById('f-desc').innerText = obj.desc;
-
-            // Manejo de imagen/icono en modal
-            const imgContainer = document.getElementById('f-img-container');
-            const iconDiv = document.getElementById('f-icon');
-
-            imgContainer.innerHTML = `<img src="${obj.img}" style="width:100%; height:300px; object-fit:cover; border-radius:15px; border:2px solid var(--gold);" loading="lazy" onerror="this.parentElement.style.display='none'; document.getElementById('f-icon').style.display='block'">`;
-            imgContainer.style.display = 'block';
-
-            iconDiv.innerText = obj.icon;
-            iconDiv.style.display = 'none'; // Se muestra solo si falla la imagen (vía onerror inline)
 
             modalFicha.classList.add('active');
             document.body.classList.add('modal-open');
@@ -912,8 +1187,12 @@
             if (e.target === modalFicha) toggleFicha();
         }
 
-        // Scroll Effect para el Header
+        // Init App
+        init();
+
+        // Header Scroll Effect
         let lastScroll = 0;
+        const header = document.querySelector('header');
         window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset;
             if (currentScroll <= 0) {
@@ -927,10 +1206,6 @@
             }
             lastScroll = currentScroll;
         });
-
-        // Arrancar
-        init();
-
     </script>
 </body>
 
