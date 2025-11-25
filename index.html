@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexos: Museo de la Transformación Mexicana</title>
+    <link rel="icon" type="image/jpeg" href="images/nexos.jpg">
+    <link rel="apple-touch-icon" href="images/nexos.jpg">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cormorant+Garamond:wght@300;400;600&display=swap');
 
@@ -648,9 +650,25 @@
         }
 
         @media (max-width: 768px) {
+            header {
+                flex-wrap: wrap;
+                height: auto;
+                padding: 10px 15px;
+                gap: 10px;
+            }
+
             header h1 {
-                font-size: 2.5rem;
-                letter-spacing: 6px;
+                font-size: 1.2rem;
+                letter-spacing: 2px;
+            }
+
+            .header-text-secondary {
+                display: none;
+            }
+
+            .btn-guia {
+                padding: 6px 12px;
+                font-size: 0.7rem;
             }
 
             .grid-salas {
@@ -667,7 +685,7 @@
             }
 
             .container {
-                padding: 120px 20px 60px;
+                padding: 100px 20px 60px;
             }
         }
     </style>
@@ -677,7 +695,7 @@
     <header>
         <div style="display:flex; align-items:center; gap:15px;">
             <h1>NEXOS</h1>
-            <span
+            <span class="header-text-secondary"
                 style="color:var(--gold); font-size:0.9rem; letter-spacing:1px; border-left:1px solid var(--gold); padding-left:15px; opacity:0.8;">Museo
                 de la Transformación</span>
         </div>
@@ -1091,7 +1109,7 @@
 
                 // Si existe img, se usa; si no, se usa el icono
                 let content = data.img ?
-                    `<img src="${data.img}" class="sala-img" alt="${data.title}">` :
+                    `<img src="${data.img}" class="sala-img" alt="${data.title}" loading="lazy" decoding="async" width="120" height="120">` :
                     `<span class="icon-sala">${data.icon}</span>`;
 
                 div.innerHTML = content +
@@ -1120,7 +1138,7 @@
                 card.className = 'card-object';
 
                 let objContent = obj.img ?
-                    `<img src="${obj.img}" class="obj-img" alt="${obj.nombre}">` :
+                    `<img src="${obj.img}" class="obj-img" alt="${obj.nombre}" loading="lazy" decoding="async" width="300" height="180">` :
                     `<span class="obj-icon">${obj.icon}</span>`;
 
                 card.innerHTML = objContent +
@@ -1155,7 +1173,7 @@
             const iconDiv = document.getElementById('f-icon');
 
             if (obj.img) {
-                imgContainer.innerHTML = `<img src="${obj.img}" style="width:100%; max-width:400px; border-radius:15px; border:3px solid var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">`;
+                imgContainer.innerHTML = `<img src="${obj.img}" style="width:100%; max-width:400px; border-radius:15px; border:3px solid var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,0.5);" loading="lazy" decoding="async" alt="${obj.nombre}">`;
                 imgContainer.style.display = 'block';
                 iconDiv.style.display = 'none';
             } else {
