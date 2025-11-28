@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexos: Museo de la Transformación Mexicana</title>
+    <link rel="icon" type="image/jpeg" href="images/nexos.jpg">
+    <link rel="apple-touch-icon" href="images/nexos.jpg">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cormorant+Garamond:wght@300;400;600&display=swap');
 
@@ -590,7 +592,6 @@
             max-height: 90vh;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(212, 175, 55, 0.2);
             position: relative;
-            /* Se asegura que el contenido no desborde */
         }
 
         .ficha-header {
@@ -647,10 +648,91 @@
             border-left: 5px solid var(--gold);
         }
 
+        /* --- FOOTER / CRÉDITOS --- */
+        .site-footer {
+            background: linear-gradient(180deg, rgba(15, 10, 8, 1) 0%, #000 100%);
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 60px 20px;
+            margin-top: 80px;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .footer-heading {
+            font-family: var(--font-heading);
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: left;
+        }
+
+        .footer-column h4 {
+            color: var(--gold-light);
+            font-family: var(--font-heading);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            border-left: 3px solid var(--gold);
+            padding-left: 10px;
+        }
+
+        .footer-column p,
+        .footer-column li {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 5px 0;
+            list-style: none;
+        }
+
+        .footer-column ul {
+            padding: 0;
+            margin: 0;
+        }
+
+        .student-list li {
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            padding: 8px 0;
+        }
+
+        .student-list li:last-child {
+            border-bottom: none;
+        }
+
         @media (max-width: 768px) {
+            header {
+                flex-wrap: wrap;
+                height: auto;
+                padding: 10px 15px;
+                gap: 10px;
+            }
+
             header h1 {
-                font-size: 2.5rem;
-                letter-spacing: 6px;
+                font-size: 1.2rem;
+                letter-spacing: 2px;
+            }
+
+            .header-text-secondary {
+                display: none;
+            }
+
+            .btn-guia {
+                padding: 6px 12px;
+                font-size: 0.7rem;
             }
 
             .grid-salas {
@@ -667,7 +749,17 @@
             }
 
             .container {
-                padding: 120px 20px 60px;
+                padding: 100px 20px 60px;
+            }
+
+            .footer-grid {
+                text-align: center;
+            }
+
+            .footer-column h4 {
+                border-left: none;
+                border-bottom: 3px solid var(--gold);
+                display: inline-block;
             }
         }
     </style>
@@ -677,7 +769,7 @@
     <header>
         <div style="display:flex; align-items:center; gap:15px;">
             <h1>NEXOS</h1>
-            <span
+            <span class="header-text-secondary"
                 style="color:var(--gold); font-size:0.9rem; letter-spacing:1px; border-left:1px solid var(--gold); padding-left:15px; opacity:0.8;">Museo
                 de la Transformación</span>
         </div>
@@ -706,7 +798,37 @@
         </div>
     </div>
 
-    <!-- MODAL GUÍA -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-heading">Créditos Académicos</div>
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>Docente</h4>
+                    <p>Juan Antonio Aldaco Aldaco</p>
+                    <br>
+                    <h4>Materia</h4>
+                    <p>Estructura Socioeconómica de México</p>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Grupo</h4>
+                    <p>Físico-Matemático</p>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Equipo</h4>
+                    <ul class="student-list">
+                        <li>Guerrero Segoviando Jaime Fernando</li>
+                        <li>Pérez López Juan Pablo</li>
+                        <li>Regalado Razo Luis Angel</li>
+                        <li>Rubalcava Ledesma Ian Eduardo</li>
+                        <li>Sandoval Guevara Rodrigo</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <div id="modal-guide" class="modal-overlay">
         <div class="modal-content">
             <span class="close-btn" onclick="toggleGuide()">&times;</span>
@@ -781,7 +903,6 @@
         </div>
     </div>
 
-    <!-- MODAL FICHA TÉCNICA -->
     <div id="modal-ficha" class="modal-overlay" onclick="closeFichaOutside(event)">
         <div class="ficha-modal">
             <span class="close-btn" onclick="toggleFicha()">&times;</span>
@@ -870,6 +991,7 @@
             }
         };
 
+        // OBJETOS CORREGIDOS (Máquina de Escribir y Desayuno DIF)
         const objetos = [
             {
                 sala: 'monedas',
@@ -900,8 +1022,8 @@
                 nombre: "Máquina de Escribir Olivetti",
                 icon: "⌨️",
                 img: "images/tecnologia_maquina_olivetti.png",
-                periodo: "1960-1980",
-                pres: "Díaz Ordaz / Echeverría",
+                periodo: "1958-1970", /* CORREGIDO: Ajustado al Desarrollo Estabilizador */
+                pres: "López Mateos / Díaz Ordaz",
                 mod: "Desarrollo Estabilizador",
                 growth: "Crecimiento sostenido",
                 con: "Burocracia",
@@ -996,9 +1118,9 @@
                 nombre: "Desayuno Escolar (DIF)",
                 icon: "🥛",
                 img: "images/salud_desayuno_escolar.png",
-                periodo: "1970s",
-                pres: "Luis Echeverría",
-                mod: "Desarrollo Compartido",
+                periodo: "1977", /* CORREGIDO: Año de fundación del DIF */
+                pres: "José López Portillo", /* CORREGIDO: Creador del DIF */
+                mod: "Alianza para la Producción",
                 growth: "Gasto Social",
                 con: "Asistencia",
                 desc: "Programas para combatir la desnutrición infantil y mejorar el rendimiento escolar en zonas marginadas."
@@ -1091,7 +1213,7 @@
 
                 // Si existe img, se usa; si no, se usa el icono
                 let content = data.img ?
-                    `<img src="${data.img}" class="sala-img" alt="${data.title}">` :
+                    `<img src="${data.img}" class="sala-img" alt="${data.title}" loading="lazy" decoding="async" width="120" height="120">` :
                     `<span class="icon-sala">${data.icon}</span>`;
 
                 div.innerHTML = content +
@@ -1120,7 +1242,7 @@
                 card.className = 'card-object';
 
                 let objContent = obj.img ?
-                    `<img src="${obj.img}" class="obj-img" alt="${obj.nombre}">` :
+                    `<img src="${obj.img}" class="obj-img" alt="${obj.nombre}" loading="lazy" decoding="async" width="300" height="180">` :
                     `<span class="obj-icon">${obj.icon}</span>`;
 
                 card.innerHTML = objContent +
@@ -1155,7 +1277,7 @@
             const iconDiv = document.getElementById('f-icon');
 
             if (obj.img) {
-                imgContainer.innerHTML = `<img src="${obj.img}" style="width:100%; max-width:400px; border-radius:15px; border:3px solid var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">`;
+                imgContainer.innerHTML = `<img src="${obj.img}" style="width:100%; max-width:400px; border-radius:15px; border:3px solid var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,0.5);" loading="lazy" decoding="async" alt="${obj.nombre}">`;
                 imgContainer.style.display = 'block';
                 iconDiv.style.display = 'none';
             } else {
